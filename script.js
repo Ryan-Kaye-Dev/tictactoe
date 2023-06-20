@@ -108,7 +108,7 @@ const GameController = {
         this.currentPlayer = this.players[nextIndex];
 
         //log switching of players
-        console.log(`Switched turn to ${this.currentPlayer.name}.`)
+        console.log(`${this.currentPlayer.name}! It's your turn!`)
     },
 
     endGame: function(winningSymbol) {
