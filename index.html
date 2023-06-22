@@ -8,18 +8,41 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <div id="top-bar">
+      <form>
+        <fieldset>
+          <legend>Set Usernames</legend>
+          <label for="player1">Player 1:</label>
+          <input name="player1" class=player-input type="text" value="Player1">
+          <label for="player2">Player 2:</label>
+          <input name="player2" class="player-input" type="text" value="Player2">
+        </fieldset>
+      </form>
+    </div>
     <div id="container">
-        <div id="gameboard">
-            <div class="cell" id="0"></div>
-            <div class="cell" id="1"></div>
-            <div class="cell" id="2"></div>
-            <div class="cell" id="3"></div>
-            <div class="cell" id="4"></div>
-            <div class="cell" id="5"></div>
-            <div class="cell" id="6"></div>
-            <div class="cell" id="7"></div>
-            <div class="cell" id="9"></div>
+
+      <div id="gameboard">
+        <div class="cell" id="0"></div>
+        <div class="cell" id="1"></div>
+        <div class="cell" id="2"></div>
+        <div class="cell" id="3"></div>
+        <div class="cell" id="4"></div>
+        <div class="cell" id="5"></div>
+        <div class="cell" id="6"></div>
+        <div class="cell" id="7"></div>
+        <div class="cell" id="9"></div>
+      </div>
+      <div id="bottom-bar">
+        <div class="button" id="button-7">
+          <div id="dub-arrow">
+            <img
+              src="https://github.com/atloomer/atloomer.github.io/blob/master/img/iconmonstr-arrow-48-240.png?raw=true"
+              alt=""
+            />
+          </div>
+          <a href="#">New Game</a>
         </div>
+      </div>
     </div>
     <script src="./script.js"></script>
   </body>
