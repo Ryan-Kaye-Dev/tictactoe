@@ -190,8 +190,11 @@ let GameBoard = {
     playerOneInput = document.getElementById("player1input");
     playerTwoInput = document.getElementById("player2input");
     gameboard = document.getElementById("gameboard");
+    loader = document.getElementById("loader");
 
     gameboard.classList.replace("hidden", "visible");
+    loader.classList.add("hidden");
+    
     playerOne = playerOneInput.value;
     playerTwo = playerTwoInput.value;
     return GameController.startGame(playerOne, playerTwo)
