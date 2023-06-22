@@ -91,13 +91,18 @@ let GameBoard = {
     currentPlayer: null,
     players: [],
   
-    startGame: function() {
+    logToConsole: function(string) {
+      const console = document.getElementById("console");
+      console.textContent = string;
+    },
+    
+    startGame: function(playerOne, playerTwo) {
       // initialise the game, set up players.
       GameBoard.initBoard();
   
       // create players
-      const player1 = createPlayer("ryan", "X");
-      const player2 = createPlayer("taylor", "O");
+      const player1 = createPlayerFactory(playerOne, "X");
+      const player2 = createPlayerFactory(playerTwo, "O");
   
       // initalise players in GameController
       this.players = [player1, player2];
@@ -107,8 +112,8 @@ let GameBoard = {
       this.currentPlayer = this.players[randomIndex];
   
       // Log Game Started & Current player
-      console.log("Game started!");  
-      console.log(`${this.currentPlayer.name}! It's your turn!`);
+      GameController.logToConsole("Game started!");  
+      GameController.logToConsole(`${this.currentPlayer.name}! It's your turn!`);
 
     // Add event listeners to cells for player moves
     const cells = Array.from(document.getElementsByClassName("cell"));
@@ -136,7 +141,7 @@ let GameBoard = {
       if (winningSymbol) {
         this.endGame(winningSymbol);
       } else if (isDraw) {
-        console.log("Game Over! It's a draw!");
+        GameController.logToConsole("Game Over! It's a draw!");
       } else {
         // switch to the next player's turn
         this.switchTurn();
@@ -156,32 +161,39 @@ let GameBoard = {
       this.currentPlayer = this.players[nextIndex];
   
       // log switching of players
-      console.log(`${this.currentPlayer.name}! It's your turn!`);
+      GameController.logToConsole(`${this.currentPlayer.name}! It's your turn!`);
     },
   
     endGame: function(winningSymbol) {
       // Handle end of the game, display the winner.
       if (winningSymbol) {
         const winner = this.players.find(player => player.symbol === winningSymbol);
-        console.log(`Game Over! ${winner.name} wins!`);
+        GameController.logToConsole(`Game Over! ${winner.name} wins!`);
       }
     }
   };
   
   // player factory function for creating a new player
-  function createPlayer(name, symbol) {
+  function createPlayerFactory(name, symbol) {
     return {
       name,
       symbol,
     };
   }
-  
-  // Start the game
-  GameController.startGame();
 
   // add event listener for button to start a newGame
   const newGame = document.getElementById("dub-arrow");
   newGame.addEventListener("click", () => {
     GameBoard.initBoard();
     GameBoard.updateBoard();
+
+    playerOneInput = document.getElementById("player1input");
+    playerTwoInput = document.getElementById("player2input");
+    gameboard = document.getElementById("gameboard");
+
+    gameboard.classList.replace("hidden", "visible");
+    playerOne = playerOneInput.value;
+    playerTwo = playerTwoInput.value;
+    return GameController.startGame(playerOne, playerTwo)
+
   });
