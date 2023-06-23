@@ -29,6 +29,7 @@ let GameBoard = {
 
   makeAIMove: function (playerSymbol) {
     if (GameBoard.checkDraw()) {
+      GameController.logToConsole("Game Over! It's a draw!");
       return false; // Board full, can't make a move.
     }
 
@@ -41,6 +42,7 @@ let GameBoard = {
       GameBoard.updateBoard();
       GameController.switchTurn();
       GameBoard.checkWin();
+      GameBoard.checkDraw();
       return true; // Return true if the move is valid and successfully made
     }
 
@@ -160,7 +162,7 @@ const GameController = {
     if (aiCheck.checked && this.currentPlayer === this.players[1]) {
       setTimeout(() => {
         GameBoard.makeAIMove(this.currentPlayer.symbol);
-      }, 100); // adds a delay of 100ms to give the impression of AI thinking.
+      }, 1000); // adds a delay of 100ms to give the impression of AI thinking.
     }
   },
 
@@ -191,7 +193,7 @@ const GameController = {
       if (aiCheck.checked && this.currentPlayer === this.players[1]) {
         setTimeout(() => {
           GameBoard.makeAIMove(this.currentPlayer.symbol);
-        }, 100); // adds a delay of 100ms to give impression of AI thinking.
+        }, 1000); // adds a delay of 100ms to give impression of AI thinking.
       }
     }
   },
@@ -222,6 +224,10 @@ const GameController = {
       winPopUp.textContent = `Game Over! ${winner.name} wins!`;
       winPopUp.classList.replace("off", "on");
       GameController.logToConsole(`Game Over! ${winner.name} wins!`);
+
+      // get arrow pointer
+      const arrow = document.getElementById("arrow");
+      arrow.classList.replace("off", "on");
     }
   },
 };
@@ -239,6 +245,10 @@ const newGame = document.getElementById("dub-arrow");
 newGame.addEventListener("click", () => {
   GameBoard.initBoard();
   GameBoard.updateBoard();
+
+        // get arrow pointer
+  const arrow = document.getElementById("arrow");
+  arrow.classList.replace("on", "off");
 
   playerOneInput = document.getElementById("player1input");
   playerTwoInput = document.getElementById("player2input");
