@@ -168,6 +168,10 @@ let GameBoard = {
       // Handle end of the game, display the winner.
       if (winningSymbol) {
         const winner = this.players.find(player => player.symbol === winningSymbol);
+                          // get win-popup
+                          winPopUp = document.getElementById("win-popup");
+                          winPopUp.textContent = `Game Over! ${winner.name} wins!`;
+                          winPopUp.classList.replace("off", "on");
         GameController.logToConsole(`Game Over! ${winner.name} wins!`);
       }
     }
@@ -191,6 +195,9 @@ let GameBoard = {
     playerTwoInput = document.getElementById("player2input");
     gameboard = document.getElementById("gameboard");
     loader = document.getElementById("loader");
+    winPopUp = document.getElementById("win-popup");
+
+    winPopUp.classList.replace("on", "off");
 
     gameboard.classList.replace("hidden", "visible");
     loader.classList.add("hidden");

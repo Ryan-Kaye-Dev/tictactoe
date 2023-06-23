@@ -1,20 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:300,400');
+@import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@700&display=swap');
 
-* {
-  font-family: "Roboto", sans-serif;
-  background-color: #e0f2fe;
-}
 #container {
+  background-color: #e0f2fe;
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: 1fr, 0.25fr;
     justify-items: center;
     align-items: center;
-    height: 100vh;
+    height: 80vh;
     padding-top: 5vh;
   }
   
   #top-bar {
+    background-color: #e0f2fe;
     justify-items: end;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -38,23 +36,24 @@
     grid-column: 2 / 3;
     width: 400px;
     height: 400px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s, transform 0.5s;
   }
 
-  #gameboard.hidden {
-    display: none;
-  }
 
   #gameboard.visible {
-    display: grid;
+    opacity: 1;
+    transform: translateY(0);
   }
   
   .cell {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Fuzzy Bubbles', cursive;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 48px;
+    font-size: 100px;
     cursor: pointer;
     border: 1px solid #1b2f31;
   }
@@ -91,6 +90,7 @@
 #console {
   color: #1b2f31;
   font-family: "Roboto", sans-serif;
+  font-size: 24px;
   font-weight: 700;
   padding-top: 5vh;
   grid-column: 2 / 2;
@@ -164,6 +164,7 @@ a {
   }
   
   #button-7 img {
+    background-color: #e0f2fe00;;
     width: 20px;
     height: auto;
   }
@@ -193,7 +194,7 @@ a {
     border-radius: 50%;
     display: inline-block;
     position: absolute;
-    bottom: 40vh;
+    top: 35%;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
   }
@@ -219,3 +220,51 @@ a {
       transform: rotate(360deg);
     }
   } 
+
+  #win-popup {
+    display: flex;
+    text-align: center;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    color: whitesmoke;
+    font-family: 'Fuzzy Bubbles', cursive;
+    font-size: 3em;
+    background-color: #036aa1ad;
+    border-radius: 10px;
+    box-shadow: 2px 2px 15px 1px rgba(0, 0, 0, 0.534);
+    width: 15vw;
+    height: 20vh;
+    border: 1px solid black;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+    transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  
+  #win-popup.off {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+  
+  #win-popup.on {
+    transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+    animation: show-popup 0.5s 1.5s forwards;
+  }
+  
+  @keyframes show-popup {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.2);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+  
+  

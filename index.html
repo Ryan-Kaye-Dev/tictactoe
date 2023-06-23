@@ -13,9 +13,11 @@
         <fieldset>
           <legend>Set Usernames</legend>
           <label for="player1">Player 1:</label>
-          <input id="player1input" name="player1" class=player-input type="text" value="Player1">
+          <input id="player1input" name="player1" class=player-input type="text" value="Player1" maxlength="15">
           <label for="player2">Player 2:</label>
-          <input id="player2input" name="player2" class="player-input" type="text" value="Player2">
+          <input id="player2input" name="player2" class="player-input" type="text" value="Player2" maxlength="15">
+          <label for="checkbox">A.I?</label>
+          <input type="checkbox">
         </fieldset>
       </form>
       <div id="bottom-bar">
@@ -31,17 +33,19 @@
     <div id="container">
       <span id="loader"></span>
         <div id="gameboard" class="hidden">
-        <div class="cell" id="0"></div>
-        <div class="cell" id="1"></div>
-        <div class="cell" id="2"></div>
-        <div class="cell" id="3"></div>
-        <div class="cell" id="4"></div>
-        <div class="cell" id="5"></div>
-        <div class="cell" id="6"></div>
-        <div class="cell" id="7"></div>
-        <div class="cell" id="9"></div>
+        <div class="cell animated-text" id="0"></div>
+        <div class="cell animated-text" id="1"></div>
+        <div class="cell animated-text" id="2"></div>
+        <div class="cell animated-text" id="3"></div>
+        <div class="cell animated-text" id="4"></div>
+        <div class="cell animated-text" id="5"></div>
+        <div class="cell animated-text" id="6"></div>
+        <div class="cell animated-text" id="7"></div>
+        <div class="cell animated-text" id="9"></div>
       </div>
       <div id="console">Awaiting New Game</div>
+    </div>
+    <div id="win-popup" class="off">
     </div>
     <script src="./script.js"></script>
   </body>
