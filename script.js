@@ -32,21 +32,76 @@ let GameBoard = {
       GameController.logToConsole("Game Over! It's a draw!");
       return false; // Board full, can't make a move.
     }
-
-    let cell = Math.floor(Math.random() * this.gameboard.length);
-    console.log(`A.I. Chooses Cell ${cell}.`);
-
-    if (this.gameboard[cell] === "") {
+  
+    // Call the minimax function to find the best move
+    const bestMove = this.minimax(this.gameboard, playerSymbol, true).index;
+  
+    console.log(`A.I. Chooses Cell ${bestMove}.`);
+  
+    if (this.gameboard[bestMove] === "") {
       // update the gameboard with player symbol
-      this.gameboard[cell] = playerSymbol;
+      this.gameboard[bestMove] = playerSymbol;
       GameBoard.updateBoard();
       GameController.switchTurn();
       GameBoard.checkWin();
       GameBoard.checkDraw();
       return true; // Return true if the move is valid and successfully made
     }
-
+  
     return this.makeAIMove(playerSymbol); // Recursive call
+  },
+  
+  minimax: function (board, playerSymbol, isMaximizing) {
+    // Define the evaluation function
+    const evaluateBoard = () => {
+      const winningSymbol = GameBoard.checkWin();
+      if (winningSymbol === playerSymbol) {
+        return 1; // AI wins
+      } else if (winningSymbol !== null) {
+        return -1; // Human wins
+      } else {
+        return 0; // Draw
+      }
+    };
+  
+    // Base case: check if the game is over or depth limit reached
+    if (GameBoard.checkWin() || GameBoard.checkDraw()) {
+      return { score: evaluateBoard() };
+    }
+  
+    // Initialize variables
+    let bestScore;
+    let bestMove;
+  
+    if (isMaximizing) {
+      bestScore = -Infinity;
+      for (let i = 0; i < board.length; i++) {
+        if (board[i] === "") {
+          board[i] = playerSymbol;
+          const score = this.minimax(board, playerSymbol, false).score;
+          board[i] = ""; // Undo the move
+          if (score > bestScore) {
+            bestScore = score;
+            bestMove = i;
+          }
+        }
+      }
+    } else {
+      bestScore = Infinity;
+      for (let i = 0; i < board.length; i++) {
+        if (board[i] === "") {
+          board[i] = playerSymbol === "X" ? "O" : "X";
+          const score = this.minimax(board, playerSymbol, true).score;
+          board[i] = ""; // Undo the move
+          if (score < bestScore) {
+            bestScore = score;
+            bestMove = i;
+          }
+        }
+      }
+    }
+  
+    return { score: bestScore, index: bestMove };
   },
 
   updateBoard: function () {

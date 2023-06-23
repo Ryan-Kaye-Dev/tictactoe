@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@700&display=swap');
 
+* {
+  margin: 0;
+}
+
 #container {
   background-color: #e0f2fe;
     display: grid;
@@ -223,12 +227,16 @@ a {
 
   #win-popup {
     display: flex;
+    flex-direction: column;
+    min-width: 25vw;
+    min-height: 20vh;
     text-align: center;
     align-items: center; /* Center vertically */
     justify-content: center; /* Center horizontally */
     color: whitesmoke;
     font-family: 'Fuzzy Bubbles', cursive;
-    font-size: 3em;
+      /* Responsive font size using clamp() */
+    font-size: clamp(1rem, 4vw, 2rem);
     background-color: #036aa1ad;
     border-radius: 10px;
     box-shadow: 2px 2px 15px 1px rgba(0, 0, 0, 0.534);
@@ -273,9 +281,9 @@ a {
     left: 55px;
     width: 40px;
     height: 40px;
-    background-image: url('https://cdn-icons-png.flaticon.com/128/2223/2223703.png'); /* Replace with your arrow image */
+    background-image: url('https://cdn-icons-png.flaticon.com/128/10186/10186781.png');
     background-size: cover;
-    animation: moveArrow .3s infinite alternate;
+    animation: moveArrow .2s infinite alternate;
   }
 
   #arrow.off {
