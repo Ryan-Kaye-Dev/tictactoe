@@ -36,15 +36,22 @@ let GameBoard = {
     // Call the minimax function to find the best move
     const bestMove = this.minimax(this.gameboard, playerSymbol, true).index;
   
-    console.log(`A.I. Chooses Cell ${bestMove}.`);
+    console.log(`A.I. Chooses Cell ${bestMove}`);
   
     if (this.gameboard[bestMove] === "") {
       // update the gameboard with player symbol
       this.gameboard[bestMove] = playerSymbol;
       GameBoard.updateBoard();
       GameController.switchTurn();
-      GameBoard.checkWin();
-      GameBoard.checkDraw();
+      const winningSymbol = GameBoard.checkWin();
+      const isDraw = GameBoard.checkDraw();
+  
+      if (winningSymbol) {
+        GameController.endGame(winningSymbol);
+      } else if (isDraw) {
+        GameController.logToConsole("Game Over! It's a draw!");
+      }
+  
       return true; // Return true if the move is valid and successfully made
     }
   
