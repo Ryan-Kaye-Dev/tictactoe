@@ -8,7 +8,7 @@
   background-color: #e0f2fe;
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    grid-template-rows: 1fr, 0.25fr;
+    grid-template-rows: 1fr, 0.25fr, 0.25fr;
     justify-items: center;
     align-items: center;
     height: 80vh;
@@ -298,4 +298,14 @@ a {
     100% {
       top: 15px;
     }
+  }
+
+  #footer {
+    background-color: #e0f2fe;
+  }
+
+  #footer img {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    width: 50px;
   }
